@@ -5,7 +5,7 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.python_operator import BranchPythonOperator
 from airflow.utils.trigger_rule import TriggerRule
-from airflow_training.operators.postgres_to_gcs.py import PostgresToGoogleCloudStorageOperator
+from airflow_training.operators.postgres_to_gcs import PostgresToGoogleCloudStorageOperator
 
 
 args = {"owner": "sacha_roggeveen",
