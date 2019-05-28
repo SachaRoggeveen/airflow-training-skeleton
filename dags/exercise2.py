@@ -1,6 +1,6 @@
 from airflow.operators.bash_operator import Bashoperator
-from airflow.operators.bash_operator import DummyOperator
-from airflow.operators.bash_operator import PythonOperator
+from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.python_operator PythonOperator
 
 args = {"owner": "sacha_roggeveen", "start_date": airflow.utils.dates.days_ago(14)}
 
