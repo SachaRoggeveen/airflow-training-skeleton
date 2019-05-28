@@ -15,31 +15,18 @@ dag = DAG(
 def _get_weekday(execution_date, **context):
     return execution_date.strftime("%a")
 
-
 t1 = BashOperator(task_id="print_weekday",
                   bash_command="date +%A",
                   dag=dag)
 
 branching = BranchPythonOperator(
     task_id="branching",
-    python_callable=_get_weekday,
-    provide_context=True,
     dag=dag)
 
 t1 >> branching
 
-weekday_person_to_email = {
-    0: "Bob",    # Monday
-    1: "Joe",    # Tuesday
-    2: "Alice",  # Wednesday
-    3: "Joe",    # Thursday
-    4: "Alice",  # Friday
-    5: "Alice",  # Saturday
-    6: "Alice",  # Sunday
-}
 
-
-for person in weekday_person_to_email.values():
+for person in ["Bob", "Joe", "Alice"]:
     branching >> DummyOperator(task_id=person, dag=dag)
 
 email = DummyOperator(task_id="mail_ff",
