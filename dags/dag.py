@@ -7,7 +7,12 @@ dag = DAG(
     default_args={
         "owner": "godatadriven",
         "start_date": airflow.utils.dates.days_ago(3),
-    }
+    },
+    dag_id="hello_airflow2",
+        default_args={
+            "owner": "godatadriven",
+            "start_date": airflow.utils.dates.days_ago(3),
+        }
 )
 
 BashOperator(
