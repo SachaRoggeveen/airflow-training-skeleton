@@ -16,15 +16,17 @@ def _get_weekday(execution_date, **context):
     return execution_date.strftime("%a")
 
 
+t1 = BashOperator(task_id="print_weekday",
+                  bash_command="date +%A",
+                  dag=dag)
+
 branching = BranchPythonOperator(
     task_id="branching",
     python_callable=_get_weekday,
     provide_context=True,
     dag=dag)
 
-t1 = BashOperator(task_id="print_weekday",
-                  bash_command="date +%A",
-                  dag=dag)
+t1 >> branching
 
 weekday_person_to_email = {
     0: "Bob",    # Monday
@@ -36,14 +38,15 @@ weekday_person_to_email = {
     6: "Alice",  # Sunday
 }
 
-for person in weekday_person_to_email:
+
+for person in weekday_person_to_email.values():
     branching >> DummyOperator(task_id=person, dag=dag)
 
 email = DummyOperator(task_id="mail_ff",
-                  dag=dag)
+                        dag=dag)
 
-final = DummyOperator(task_id="the_end",
-                  dag=dag)
+final_task = BashOperator(task_id="final_task",
+                          bash_command="sleep 5",
+                          dag=dag)
 
-
-t1 >> branching >> email >> final
+branching >> email >> final_task
