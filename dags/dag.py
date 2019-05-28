@@ -7,12 +7,6 @@ dag = DAG(
     default_args={
         "owner": "godatadriven",
         "start_date": airflow.utils.dates.days_ago(3),
-    },
-    dag_id="demo",
-    default_args={
-    description="Execution interval test",
-    start_date=datetime.datetime(2019,1,1),
-    schedule_interval="@daily",
     }
 )
 
