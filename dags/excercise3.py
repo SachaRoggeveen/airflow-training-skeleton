@@ -19,6 +19,9 @@ dag = DAG(
 def _get_weekday(execution_date, **context):
     return execution_date.strftime("%a")
 
+def print_weekday(execution_date, **context):
+    print(execution_date.strftime("%a"))
+
 print_weekday = PythonOperator(
     task_id="print_weekday",
     python_callable=print_weekday,
