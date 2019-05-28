@@ -10,6 +10,7 @@ dag = DAG(
     }
 )
 
+
 BashOperator(
     task_id="print_exec_date", bash_command="echo {{ execution_date }}", dag=dag
 )
