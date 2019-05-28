@@ -1,3 +1,4 @@
+import airflow
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
@@ -26,8 +27,7 @@ t4 = BashOperator(task_id="wait_10",
                   bash_command="sleep 10s",
                   dag=dag)
 
-t5 = BashOperator(task_id="the_end",
-                  bash_command="echo 1",
+t5 = DummyOperator(task_id="the_end",
                   dag=dag)
 
 t1 >> [t2,t3,t4] >> t5
