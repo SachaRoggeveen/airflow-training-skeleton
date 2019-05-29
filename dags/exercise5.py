@@ -69,7 +69,7 @@ class MyOwnOperator(BaseOperator):
     def execute(self, context):
         http = HttpHook(self.method, http_conn_id=self.http_conn_id)
         gchook = GoogleCloudStorageHook(
-            google_cloud_storage_conn_id=self.google_cloud_storage_conn_id,
+            google_cloud_storage_conn_id='google_cloud_platform',
             delegate_to=self.delegate_to,
         )
 
@@ -112,7 +112,7 @@ http_to_gcs = MyOwnOperator(
 #     task_id="…",
 #     bucket="buckster",
 #     source_objects=["average_prices/transfer_date={{ ds }}/*"],
-#     destination_project_dataset_table="your_project:prices.land_registry_price${{ ds_nodash }}",
+#     destination_project_dataset_table="your_project:prices.land_registrygoogle_cloud_storage_conn_id_price${{ ds_nodash }}",
 #     source_format="PARQUET",
 #     write_disposition="WRITE_TRUNCATE",
 #     dag=dag,
