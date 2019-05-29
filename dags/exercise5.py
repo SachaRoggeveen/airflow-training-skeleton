@@ -69,8 +69,6 @@ class MyOwnOperator(BaseOperator):
     def execute(self, context):
         http = HttpHook(self.method, http_conn_id=self.http_conn_id)
         gchook = GoogleCloudStorageHook(
-            google_cloud_storage_conn_id='google_cloud_platform',
-            delegate_to=self.delegate_to,
         )
 
         self.log.info("Calling HTTP method")
