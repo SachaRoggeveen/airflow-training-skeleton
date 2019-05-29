@@ -82,7 +82,7 @@ class MyOwnOperator(BaseOperator):
             if not self.response_check(response):
                 raise AirflowException("Response check returned False.")
 
-        gchook.upload(response.json())
+        gchook.upload(response.text)
 
 
 
@@ -93,7 +93,7 @@ args = {
     "start_date": airflow.utils.dates.days_ago(14),
 }
 
-dag = DAG(dag_id="doei3", default_args=args, description="http_naar_google")
+dag = DAG(dag_id="doeidoei", default_args=args, description="http_naar_google")
 
 t_start = BashOperator(task_id="print_execution_date", bash_command="date", dag=dag)
 
