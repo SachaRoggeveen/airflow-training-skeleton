@@ -81,8 +81,10 @@ class MyOwnOperator(BaseOperator):
         if self.response_check:
             if not self.response_check(response):
                 raise AirflowException("Response check returned False.")
-
-        gchook.upload(object=response.text,filename="aaaa", bucket="buckster")
+        f=open("aaaa")
+        f.write(response.text)
+        f.close()
+        gchook.upload(object="bucketie",filename="aaaa", bucket="buckster")
 
 
 
