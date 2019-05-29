@@ -15,7 +15,7 @@ from airflow.contrib.operators.dataproc_operator import DataprocClusterDeleteOpe
 args = {
     "owner": "sacha_roggeveen",
     "schedule_interval": "@daily",
-    "start_date": airflow.utils.dates.days_ago(14),
+    "start_date": airflow.utils.dates.days_ago(1),
 }
 dag = DAG(dag_id="daggerd", default_args=args, description="clustertjerunnen")
 
