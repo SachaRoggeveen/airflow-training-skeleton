@@ -12,8 +12,12 @@ from airflow.contrib.operators.dataproc_operator import DataprocClusterCreateOpe
 from airflow.contrib.operators.dataproc_operator import DataProcPySparkOperator
 from airflow.contrib.operators.dataproc_operator import DataprocClusterDeleteOperator
 
-
-dag = DAG(dag_id="daggerd", default_args=args, description="http_naar_google")
+args = {
+    "owner": "sacha_roggeveen",
+    "schedule_interval": "@daily",
+    "start_date": airflow.utils.dates.days_ago(14),
+}
+dag = DAG(dag_id="daggerd", default_args=args, description="clustertjerunnen")
 
 t_start = BashOperator(task_id="print_execution_date", bash_command="date", dag=dag)
 
