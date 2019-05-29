@@ -33,7 +33,7 @@ dataproc_create_cluster = DataprocClusterCreateOperator(
 
 compute_aggregates = DataProcPySparkOperator(
     task_id="compute_aggregates",
-    main="https://console.cloud.google.com/storage/browser/europe-west1-training-airfl-48bde282-bucket/build_statistics.py",
+    main="gs://europe-west1-training-airfl-48bde282-bucket/build_statistics.py",
     cluster_name="analyse-pricing-{{ ds }}",
     arguments=[
         "land_registry_price_datafile_location",
