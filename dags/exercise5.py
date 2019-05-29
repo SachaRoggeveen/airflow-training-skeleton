@@ -102,7 +102,7 @@ t_start = BashOperator(task_id="print_execution_date", bash_command="date", dag=
 
 http_to_gcs = MyOwnOperator(
     task_id="http2gcs",
-    endpoint="https://europe-west2-gdd-airflow-training.cloudfunctions.net/airflow-training-transform-valutas?date={{ ds }}&to=EUR",
+    endpoint="airflow-training-transform-valutas?date={{ ds }}&to=EUR",
     dag=dag
 )
 
