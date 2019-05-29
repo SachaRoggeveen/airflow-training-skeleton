@@ -36,9 +36,9 @@ compute_aggregates = DataProcPySparkOperator(
     main="gs://europe-west1-training-airfl-48bde282-bucket/build_statistics.py",
     cluster_name="analyse-pricing-{{ ds }}",
     arguments=[
-        "land_registry_price_datafile_location",
-        "currency_datafile_location",
-        "output_datafile_location",
+        "gs://buckster/daily_load_{{ ds }}",
+        "gs://buckster/bucketie",
+        "gs://buckster/results",
     ],
     dag=dag
 )
