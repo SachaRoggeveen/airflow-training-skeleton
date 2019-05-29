@@ -37,8 +37,8 @@ class MyOwnOperator(BaseOperator):
 
     template_fields = ('endpoint', 'data',)
     template_ext = ()
-    ui_color = '#00000'
-    ui_fgcolor = '#0000'
+    ui_color = '#000000'
+    ui_fgcolor = '#000000'
 
     @apply_defaults
     def __init__(self,
@@ -49,7 +49,7 @@ class MyOwnOperator(BaseOperator):
                  response_check=None,
                  extra_options=None,
                  xcom_push=False,
-                 http_conn_id='https://europe-west2-gdd-airflow-training.cloudfunctions.net/',
+                 http_conn_id='http_default',
                  log_response=False,
                  *args, **kwargs):
         super(MyOwnOperator, self).__init__(*args, **kwargs)
@@ -95,7 +95,7 @@ args = {
     "start_date": airflow.utils.dates.days_ago(14),
 }
 
-dag = DAG(dag_id="exercise5", default_args=args, description="http_naar_google")
+dag = DAG(dag_id="doei", default_args=args, description="http_naar_google")
 
 t_start = BashOperator(task_id="print_execution_date", bash_command="date", dag=dag)
 
