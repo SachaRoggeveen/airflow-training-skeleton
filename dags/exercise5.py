@@ -49,7 +49,7 @@ class MyOwnOperator(BaseOperator):
                  response_check=None,
                  extra_options=None,
                  xcom_push=False,
-                 http_conn_id='http_default',
+                 http_conn_id='https://europe-west2-gdd-airflow-training.cloudfunctions.net/',
                  log_response=False,
                  *args, **kwargs):
         super(MyOwnOperator, self).__init__(*args, **kwargs)
