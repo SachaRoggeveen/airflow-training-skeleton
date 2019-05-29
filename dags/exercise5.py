@@ -1,5 +1,6 @@
 import airflow
 from airflow import DAG
+from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
@@ -11,7 +12,6 @@ from airflow.exceptions import AirflowException
 from airflow.hooks.http_hook import HttpHook
 from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
-
 
 
 #
@@ -63,8 +63,15 @@ class MyOwnOperator(BaseOperator):
         self.xcom_push_flag = xcom_push
         self.log_response = log_response
 
+
+
+
     def execute(self, context):
         http = HttpHook(self.method, http_conn_id=self.http_conn_id)
+        gchook = GoogleCloudStorageHook(
+            google_cloud_storage_conn_id=self.google_cloud_storage_conn_id,
+            delegate_to=self.delegate_to,
+        )
 
         self.log.info("Calling HTTP method")
 
@@ -77,8 +84,9 @@ class MyOwnOperator(BaseOperator):
         if self.response_check:
             if not self.response_check(response):
                 raise AirflowException("Response check returned False.")
-        if self.xcom_push_flag:
-            return response.text
+        gchook.upload(response)
+
+
 
 
 args = {
