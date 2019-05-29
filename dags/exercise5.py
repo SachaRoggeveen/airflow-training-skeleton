@@ -38,6 +38,7 @@ class MyOwnOperator(BaseOperator):
     template_fields = ('endpoint', 'data',)
     template_ext = ()
     ui_color = '#00000'
+    ui_fgcolor = '#0000'
 
     @apply_defaults
     def __init__(self,
@@ -93,7 +94,7 @@ t_start = BashOperator(task_id="print_execution_date", bash_command="date", dag=
 
 http_to_gcs = MyOwnOperator(
     task_id="http2gcs",
-    endpoint="https://europe-west2-gdd-airflow-training.cloudfunctions.net/airflow-training-transform-valutas?date=2018-01-01&to=EUR",
+    endpoint="https://europe-west2-gdd-airflow-training.cloudfunctions.net/airflow-training-transform-valutas?date={{ ds }}&to=EUR",
     dag=dag
 )
 
